@@ -1,0 +1,8 @@
+README.md
+setup.py
+src/orbitals/__init__.py
+src/orbitals/differential_equation.py
+src/orbitals.egg-info/PKG-INFO
+src/orbitals.egg-info/SOURCES.txt
+src/orbitals.egg-info/dependency_links.txt
+src/orbitals.egg-info/top_level.txt
