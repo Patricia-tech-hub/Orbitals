@@ -7,40 +7,25 @@ class DifferentialEquation(ABC):
     def __call__(self, t, state):
         pass
     
-    def __init__(self, f, x0, y0, h):
-        self.f = f
-        self.x = x0
-        self.y = y0
-        self.h = h
-
-    def f(t, state):
-        '''Represents the system of equations governing motion'''
-        raise NotImplementedError
-    
-    def step(self):
-        self.y += self.h * self.f(self.x, self.y)
-        self.x += self.h
-
-    def solve(self, x):
-        while self.x < x:
-            self.step()
-        return self.y
-
-    def __str__(self):
-        return f"({self.x}, {self.y})"
-    
+import numpy as np
 class OrbitalMotion(DifferentialEquation):
-    '''Represents Newton’s equations of motion under gravity'''
+    def __init__(self, G, M):
+        # Your code here
+    
+    def __call__(self, t, state):
+        """Return the derivatives of the state vector.
+        The state represents the position and velocity of the planet in
+        2D space, so state = [x, y, vx, vy]
+        Parameters:
+        t (float): Time
+        state (list): State vector [x, y, vx, vy]
+        Returns:
+        list: Derivatives [vx, vy, ax, ay]
+        """
+    x, y, vx, vy = state
+    # Your code here
+    return [vx, vy, ax, ay]
 
-    def __init__(self, x0, y0, h):
-        super().__init__(self.f, x0, y0, h)
-    
-    def f(self, t, state):
-        x, y, vx, vy = state
-        r = (x**2 + y**2)**0.5
-        a = -1 / r**3
-        return [vx, vy, a*x, a*y]
-    
 class Integrator():
     '''Integrates a differential equation'''
     
