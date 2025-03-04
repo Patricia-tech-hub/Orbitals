@@ -1,0 +1,12 @@
+name: project-orbitals
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - pip
+  - pandas
+  - numpy
+  - requests
+  - matplotlib
+  - pytest
