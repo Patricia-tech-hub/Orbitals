@@ -2,6 +2,7 @@
 build/
 dist/
 mypackage.egg-info/
+project.egg-info/
 
 # Ignore system files
 .DS_Store
