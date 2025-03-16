@@ -1,16 +1,16 @@
 from abc import ABC, abstractmethod
+import numpy as np
 
 class DifferentialEquation(ABC):
-    '''Represents a system of differential equations'''
     @abstractmethod
-    # The dunder method __call__ enables the parenthesis operator, so we can call the object as if it were a function.
     def __call__(self, t, state):
         pass
     
-import numpy as np
 class OrbitalMotion(DifferentialEquation):
     def __init__(self, G, M):
-        # Your code here
+        self.G = G
+        self.M = M
+        pass
     
     def __call__(self, t, state):
         """Return the derivatives of the state vector.
@@ -22,32 +22,8 @@ class OrbitalMotion(DifferentialEquation):
         Returns:
         list: Derivatives [vx, vy, ax, ay]
         """
-    x, y, vx, vy = state
-    # Your code here
-    return [vx, vy, ax, ay]
-
-class Integrator():
-    '''Integrates a differential equation'''
-    
-    def __init__(self, diff_eq):
-        self.diff_eq = diff_eq
-        
-    def solve(self, x):
-        return self.diff_eq.solve(x)
-    
-    def step(self, state, dt):
-        '''Integrates the differential equation by a small time step'''
-        self.diff_eq.x = state[0]
-        self.diff_eq.y = state[1]
-        self.diff_eq.h = dt
-        self.diff_eq.step()
-        return [self.diff_eq.x, self.diff_eq.y]
-
-class EulerIntegrator(Integrator):
-    '''Integrates a differential equation using the Euler method'''
-    
-    def solve(self, x):
-        state = [self.diff_eq.x, self.diff_eq.y]
-        while self.diff_eq.x < x:
-            state = self.step(state, self.diff_eq.h)
-        return state
+        x, y, vx, vy = state
+        r = np.sqrt(x**2 + y**2)
+        ax = -self.G * self.M * x / r**3
+        ay = -self.G * self.M * y / r**3
+        return [vx, vy, ax, ay]
