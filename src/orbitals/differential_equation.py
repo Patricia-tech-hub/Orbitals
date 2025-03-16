@@ -24,6 +24,6 @@ class OrbitalMotion(DifferentialEquation):
         """
         x, y, vx, vy = state
         r = np.sqrt(x**2 + y**2)
-        ax = -self.G * self.M * x / r**3
-        ay = -self.G * self.M * y / r**3
+        ax = (-self.G * self.M * x) / r**3
+        ay = (-self.G * self.M * y) / r**3
         return [vx, vy, ax, ay]
